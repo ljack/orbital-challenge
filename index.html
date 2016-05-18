@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Orbital Challenge</title>
+</head>
+
+<body>
+
+    <main>
+        <h1>Welcome to Orbital Challenge!!!</h1>
+     		<script type="x-shader/x-vertex" id="vertexshader">
+			uniform float amplitude;
+			attribute float size;
+			attribute vec3 customColor;
+
+			varying vec3 vColor;
+
+			void main() {
+
+				vColor = customColor;
+
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+				gl_PointSize = size;
+
+				gl_Position = projectionMatrix * mvPosition;
+
+			}
+		</script>
+			<script type="x-shader/x-fragment" id="fragmentshader">
+			uniform vec3 color;
+			uniform sampler2D texture;
+
+			varying vec3 vColor;
+
+			void main() {
+
+				gl_FragColor = vec4( color * vColor, 1.0 );
+				gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+
+			}
+		</script>
+		
+        <div id="display"></div>
+        <div id="app"></div>
+    </main>
+    <script src="bundle.js"></script>
+</body>
+
+</html>

@@ -69,7 +69,7 @@ function shortestPath(graph, source, target) {
                 path.push(u);
                 path.reverse();
                 print(path.join(' -> '));
-                return;
+                return path; 
             }
             predecessor[v] = u;
             queue.push(v);
